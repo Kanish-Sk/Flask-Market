@@ -1,0 +1,137 @@
+mkdir FlaskMarket
+cd FlaskMarket
+python3 -m venv venu
+venv/Scripts/activate  for activate virtual environment..
+flask --app hello(python file name) run
+
+https://flask.palletsprojects.com/en/2.2.x/quickstart/#
+for flask documentation
+
+flask --app hello --debug run #debugger mode
+without restarting we can see the change in web broweser
+prevent debug mode on after deployment
+
+pip install flask-sqlalchemy
+after some setup of database in python program
+
+type python in cmd shell is open
+>>>from market import db #market is our pytho file.
+>>>from market.models import Item
+>>>db.create_all()  It is for creating database.
+>>>from market import Item
+item1 = Item(name="Iphone", price=100000, barcode=348309493849, description="desc")
+>>> db.session.add(item1)
+>>> db.session.commit()
+>>> Item.query.all()
+[<Item 1>]
+>>>db.session.delete(item1)
+>>> quit()
+
+after that create dunder method def__repr__() inside the item class
+again python
+>>>from market improt db 
+>>>from market.models import Item
+>>>Item.query.all()
+
+>>> for item in Item.query.all():
+...     item.name
+...     item.price
+...     item.barcode
+...     item.id
+...     item.description
+...
+'Iphone'
+100000
+'348309493849'
+1
+'desc'
+'Laptop'
+50000
+'789345278546'
+2
+'description'
+
+>>> Item.query.filter_by(price=50000)
+<flask_sqlalchemy.BaseQuery object at 0x000001411CFCBC10>
+>>> for item in Item.query.filter_by(price=50000):
+...     item.name
+...
+'Laptop'
+
+#deleting all records
+>>> db.session.query(User).delete()
+6
+>>> db.session.commit()
+
+#Delete specific value
+obj=session.query(User).filter(User.id==7).first()
+session.delete(obj)
+session.commit()
+
+use db browser for sqlite3.To browse our data.
+
+Project Restructure
+Model Relationships
+
+give data to User table
+>>> from market.models import db
+>>> db.drop_all() #for delete all datas.
+>>> db.create_all()
+>>> from market.models import User,Item
+>>>u1 = User(user_name='gbyuh', password_hash='1234', emil_address='edrt@bh.com')
+>>>import os
+>>>os.system('cls') #for clear screen
+
+connect foreign key to primary key
+>>> item1 = Item.query.filter_by(price=50000)
+>>> item1
+<flask_sqlalchemy.BaseQuery object at 0x000002286C50F850>
+>>> item1 = Item.query.filter_by(price=50000).first()
+>>> item1
+item Laptop
+>>>
+#releate item to user
+>>> item1.owner
+>>> item1.owner = User.query.filter_by(user_name='fnd').first().id
+>>> db.session.add(item1)
+>>> db.session.commit()
+>>> item1.owner
+1
+>>>
+backref the user who owned thier items
+>>> i = Item.query.filter_by(name='Laptop').first()
+>>> i.owned_user
+<User 1>
+
+
+#for creating forms
+pip install flask-wtf (or) pip install -U Flask-WTF
+
+#pip upgrade command
+python -m pip install --upgrade pip
+
+#secondary package
+pip install wtforms
+
+creating form
+for register create secert keys
+
+>>> import os
+>>> os.urandom(12).hex()
+'5ae8433de648a33ff5359d57'
+
+
+pip install email_validator (or) pip install email-validator
+
+flash #Build in flask to send flashed messages
+
+
+pip install flask-bcrypt #encrypt our password.
+pip install flask_login
+
+
+For icon download https://icons8.com/icons
+For favicon https://icon-icons.com/
+<link rel="icon" type="image/x-icon" href="./static/assets/images/favicon.ico">
+
+
